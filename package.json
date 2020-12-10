@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "Types used for Agora",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "types": "index.d.ts",
+  "dependencies": {
+    "@types/mongoose": "5.10.2"
+  }
 }
