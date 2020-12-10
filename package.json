@@ -1,6 +1,6 @@
 {
   "name": "@devin_mcarthur/agora-types",
-  "version": "1.0.1-4",
+  "version": "1.0.1-5",
   "description": "Types used for Agora",
   "main": "index.js",
   "scripts": {
