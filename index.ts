@@ -1,13 +1,43 @@
 import * as mongoose from "mongoose";
 
-namespace Page {
-  export interface IPage extends mongoose.Document {
-    title: string;
-    slug: string;
-    paragraphVersionConnections: Array<{
-      paragraphID: mongoose.Types.ObjectId;
-    }>;
-  }
-}
+import SentenceTypes from "./sentence-types";
+
+// namespace AgoraTypes {
+
+//   // Paragraph Namespace
+//   export namespace Paragraph {
+//     export namespace Documents {
+//       export interface IParagraph extends mongoose.Document {
+//         pageID: mongoose.Types.ObjectId;
+//         sentences: mongoose.Types.ObjectId[];
+//         version: number;
+//         mostRecent: boolean;
+//       }
+//     }
+//   }
+
+//   // Sentence Namespace
+//   export namespace Sentence {
+//     export namespace Documents {
+//       export interface Sentence {
+//         versions: {
+//           stringArray: {
+//             string?: string;
+//             styles: SentenceTypes.StyleTypes;
+//           }[];
+//           createdAt: Date;
+//         }[];
+//       }
+//     }
+//   }
+
+//   // Question Namespace
+
+//   // Variable Namespace
+// }
+
+import Page from "./Page";
 
 export default Page;
+
+// export default AgoraTypes;
