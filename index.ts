@@ -35,9 +35,6 @@ import SentenceTypes from "./sentence-types";
 
 //   // Variable Namespace
 // }
-
-import Page from "./Page";
-
-export default Page;
+/// <reference types="Page.d.ts" />
 
 // export default AgoraTypes;

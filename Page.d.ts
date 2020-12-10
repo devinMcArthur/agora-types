@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 
 export declare namespace AgoraTypes.Page {
   export namespace Documents {
-    export interface IPage extends mongoose.Document {
+    export interface Page extends mongoose.Document {
       title: string;
       slug: string;
       paragraphVersionConnections: Array<{
@@ -10,7 +10,7 @@ export declare namespace AgoraTypes.Page {
       }>;
     }
 
-    export interface IPagePopulated extends IPage {
+    export interface PagePopulated extends Page {
       currentParagraph: {};
     }
   }
