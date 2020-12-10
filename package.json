@@ -8,8 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-  "types": "index.d.ts",
+  "types": "index.ts",
   "dependencies": {
-    "@types/mongoose": "5.10.2"
+    "@types/mongoose": "5.10.2",
+    "mongoose": "5.11.6"
   }
 }
