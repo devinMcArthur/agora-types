@@ -1,6 +1,6 @@
 import * as mongoose from "mongoose";
 
-export declare namespace AgoraTypes.Page {
+export declare namespace Page {
   export namespace Documents {
     export interface Page extends mongoose.Document {
       title: string;
