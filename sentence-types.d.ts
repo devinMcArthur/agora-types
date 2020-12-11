@@ -1,5 +1,7 @@
 import * as mongoose from "mongoose";
 
+import AgoraTypes from "./index";
+
 declare namespace SentenceTypes {
   export type InternalMentionStyleType = {
     type: "mention";
@@ -46,21 +48,21 @@ declare namespace SentenceTypes {
   export type PopulatedInternalMentionStyleType = InternalMentionStyleType & {
     value: {
       pageID: mongoose.Types.ObjectId;
-      // page: AgoraTypes.Page.Documents.IPage;
+      page: AgoraTypes.Page.Documents.Page;
     };
   };
 
   export type PopulatedVariableStyleType = VariableStyleType & {
     value: {
-      // variable: VariablePopulated;
+      variable: AgoraTypes.Variable.Documents.VariablePopulated;
       variableID: mongoose.Types.ObjectId;
     };
   };
 
   export type PopulatedQuoteStyleType = QuoteStyleType & {
     value: {
-      // page: Page;
-      // sentence: SentencePopulated;
+      page: AgoraTypes.Page.Documents.Page;
+      sentence: AgoraTypes.Sentence.Documents.SentencePopulated;
       sentenceID: mongoose.Types.ObjectId;
     };
   };
