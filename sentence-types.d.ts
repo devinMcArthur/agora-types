@@ -76,4 +76,4 @@ declare namespace SentenceTypes {
   >;
 }
 
-export = SentenceTypes;
+export default SentenceTypes;

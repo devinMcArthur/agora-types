@@ -1,9 +1,9 @@
 import * as mongoose from "mongoose";
 
-import SentenceTypes from "./sentence-types";
-import VariableTypes from "./variable-types";
+// import SentenceTypes from "./sentence-types";
+// import VariableTypes from "./variable-types";
 
-namespace AgoraTypes {
+declare namespace AgoraTypes {
   // Page Namespace
   export namespace Page {
     export namespace Documents {
@@ -53,7 +53,7 @@ namespace AgoraTypes {
         versions: {
           stringArray: {
             string?: string;
-            styles: SentenceTypes.StyleTypes;
+            // styles: SentenceTypes.StyleTypes;
           }[];
           createdAt: Date;
         }[];
@@ -71,7 +71,7 @@ namespace AgoraTypes {
         versions: {
           stringArray: {
             string?: string;
-            styles: SentenceTypes.PopulatedStyleTypes;
+            // styles: SentenceTypes.PopulatedStyleTypes;
           }[];
           createdAt: Date;
         }[];
@@ -109,12 +109,12 @@ namespace AgoraTypes {
     export namespace Documents {
       export interface Variable extends mongoose.Document {
         title: string;
-        versions: Array<VariableTypes.VariableValueTypes>;
+        // versions: Array<VariableTypes.VariableValueTypes>;
       }
 
       export interface VariablePopulated
         extends AgoraTypes.Variable.Documents.Variable {
-        versions: Array<VariableTypes.PopulatedVariableValueTypes>;
+        // versions: Array<VariableTypes.PopulatedVariableValueTypes>;
       }
 
       export interface VariablePopulatedFull
@@ -123,6 +123,8 @@ namespace AgoraTypes {
       }
     }
   }
+
+  export namespace HI {}
 }
 
 export default AgoraTypes;
