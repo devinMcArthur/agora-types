@@ -1,8 +1,5 @@
 import * as mongoose from "mongoose";
 
-import SentenceTypes from "./sentence-types";
-import VariableTypes from "./variable-types";
-
 namespace AgoraTypes {
   // Page Namespace
   export namespace Page {
@@ -53,7 +50,7 @@ namespace AgoraTypes {
         versions: {
           stringArray: {
             string?: string;
-            styles: SentenceTypes.StyleTypes;
+            styles: AgoraTypes.Sentence.Types.StyleTypes;
           }[];
           createdAt: Date;
         }[];
@@ -71,7 +68,7 @@ namespace AgoraTypes {
         versions: {
           stringArray: {
             string?: string;
-            styles: SentenceTypes.PopulatedStyleTypes;
+            styles: AgoraTypes.Sentence.Types.PopulatedStyleTypes;
           }[];
           createdAt: Date;
         }[];
@@ -86,6 +83,80 @@ namespace AgoraTypes {
         extends AgoraTypes.Sentence.Documents.SentencePopulated {
         relatedPages: AgoraTypes.Page.Documents.PagePopulated[];
       }
+    }
+
+    export namespace Types {
+      export type InternalMentionStyleType = {
+        type: "mention";
+        variant: "internal";
+        value: {
+          pageID: mongoose.Types.ObjectId;
+        };
+      };
+
+      export type ExternalMentionStyleType = {
+        type: "mention";
+        variant: "external";
+        value: {
+          url: string;
+        };
+      };
+
+      export type VariableStyleType = {
+        type: "variable";
+        value: {
+          variableID: mongoose.Types.ObjectId;
+        };
+      };
+
+      export type QuoteStyleType = {
+        type: "quote";
+        value: {
+          sentenceID: mongoose.Types.ObjectId;
+        };
+      };
+
+      export type BoldStyleType = {
+        type: "bold";
+      };
+
+      export type StyleTypes = Array<
+        | InternalMentionStyleType
+        | ExternalMentionStyleType
+        | VariableStyleType
+        | QuoteStyleType
+        | BoldStyleType
+      >;
+
+      export type PopulatedInternalMentionStyleType = InternalMentionStyleType & {
+        value: {
+          pageID: mongoose.Types.ObjectId;
+          page: AgoraTypes.Page.Documents.Page;
+        };
+      };
+
+      export type PopulatedVariableStyleType = VariableStyleType & {
+        value: {
+          variable: AgoraTypes.Variable.Documents.VariablePopulated;
+          variableID: mongoose.Types.ObjectId;
+        };
+      };
+
+      export type PopulatedQuoteStyleType = QuoteStyleType & {
+        value: {
+          page: AgoraTypes.Page.Documents.Page;
+          sentence: AgoraTypes.Sentence.Documents.SentencePopulated;
+          sentenceID: mongoose.Types.ObjectId;
+        };
+      };
+
+      export type PopulatedStyleTypes = Array<
+        | PopulatedInternalMentionStyleType
+        | ExternalMentionStyleType
+        | PopulatedVariableStyleType
+        | PopulatedQuoteStyleType
+        | BoldStyleType
+      >;
     }
   }
 
@@ -109,17 +180,84 @@ namespace AgoraTypes {
     export namespace Documents {
       export interface Variable extends mongoose.Document {
         title: string;
-        versions: Array<VariableTypes.VariableValueTypes>;
+        versions: Array<AgoraTypes.Variable.Types.VariableValueTypes>;
       }
 
       export interface VariablePopulated
         extends AgoraTypes.Variable.Documents.Variable {
-        versions: Array<VariableTypes.PopulatedVariableValueTypes>;
+        versions: Array<AgoraTypes.Variable.Types.PopulatedVariableValueTypes>;
       }
 
       export interface VariablePopulatedFull
         extends AgoraTypes.Variable.Documents.VariablePopulated {
         relatedPages: AgoraTypes.Page.Documents.PagePopulated[];
+      }
+    }
+
+    export namespace Types {
+      export type VariableValueTypes =
+        | { type: "number"; number: number; sourceURL: string; createdAt: Date }
+        | {
+            type: "equation";
+            equation: EquationTypes;
+            sourceURL?: string;
+            createdAt: Date;
+          };
+
+      export type PopulatedVariableValueTypes =
+        | {
+            type: "number";
+            number: number;
+            sourceURL: string;
+            createdAt: Date;
+            finalValue: number;
+          }
+        | {
+            type: "equation";
+            equation: EquationTypes;
+            sourceURL: string;
+            createdAt: Date;
+            finalValue: number;
+          };
+
+      export type EquationTypes = Array<
+        | {
+            type: "operator";
+            operator: "(" | ")" | "+" | "-" | "/" | "*" | "^";
+          }
+        | { type: "number"; number: number }
+        | { type: "variable"; variableID: mongoose.Types.ObjectId }
+      >;
+    }
+  }
+
+  // PageConnection namespace
+  export namespace PageConnection {
+    export namespace Documents {
+      export interface PageConnection {
+        referencedPageID: mongoose.Types.ObjectId;
+        referrerPageID: mongoose.Types.ObjectId;
+        sentenceID: mongoose.Types.ObjectId;
+      }
+    }
+  }
+
+  export namespace QuestionPageConnection {
+    export namespace Documents {
+      export interface QuestionPageConnection {
+        referrerPageID: mongoose.Types.ObjectId;
+        questionID: mongoose.Types.ObjectId;
+        sentenceID: mongoose.Types.ObjectId;
+      }
+    }
+  }
+
+  export namespace VariablePageConnection {
+    export namespace Documents {
+      export interface VariablePageConnection {
+        referrerPageID: mongoose.Types.ObjectId;
+        variableID: mongoose.Types.ObjectId;
+        sentenceID: mongoose.Types.ObjectId;
       }
     }
   }
