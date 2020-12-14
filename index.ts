@@ -112,7 +112,7 @@ namespace AgoraTypes {
       export type QuoteStyleType = {
         type: "quote";
         value: {
-          sentenceID: mongoose.Types.ObjectId;
+          statementID: mongoose.Types.ObjectId;
         };
       };
 
@@ -145,8 +145,8 @@ namespace AgoraTypes {
       export type PopulatedQuoteStyleType = QuoteStyleType & {
         value: {
           page: AgoraTypes.Page.Documents.Page;
-          sentence: AgoraTypes.Statement.Documents.StatementPopulated;
-          sentenceID: mongoose.Types.ObjectId;
+          statement: AgoraTypes.Statement.Documents.StatementPopulated;
+          statementID: mongoose.Types.ObjectId;
         };
       };
 
@@ -237,7 +237,7 @@ namespace AgoraTypes {
       export interface PageConnection {
         referencedPageID: mongoose.Types.ObjectId;
         referrerPageID: mongoose.Types.ObjectId;
-        sentenceID: mongoose.Types.ObjectId;
+        statementID: mongoose.Types.ObjectId;
       }
     }
   }
@@ -247,7 +247,7 @@ namespace AgoraTypes {
       export interface QuestionPageConnection {
         referrerPageID: mongoose.Types.ObjectId;
         questionID: mongoose.Types.ObjectId;
-        sentenceID: mongoose.Types.ObjectId;
+        statementID: mongoose.Types.ObjectId;
       }
     }
   }
@@ -257,7 +257,7 @@ namespace AgoraTypes {
       export interface VariablePageConnection {
         referrerPageID: mongoose.Types.ObjectId;
         variableID: mongoose.Types.ObjectId;
-        sentenceID: mongoose.Types.ObjectId;
+        statementID: mongoose.Types.ObjectId;
       }
     }
   }
