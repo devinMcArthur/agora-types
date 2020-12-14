@@ -29,28 +29,28 @@ namespace AgoraTypes {
     export namespace Documents {
       export interface Paragraph extends mongoose.Document {
         pageID: mongoose.Types.ObjectId;
-        sentences:
-          | AgoraTypes.Sentence.Documents.SentencePopulated[]
+        statements:
+          | AgoraTypes.Statement.Documents.StatementPopulated[]
           | mongoose.Types.ObjectId[];
         version: number;
         mostRecent: boolean;
       }
 
       export interface ParagraphPopulated extends mongoose.Document {
-        sentences: AgoraTypes.Sentence.Documents.SentencePopulated[];
+        statements: AgoraTypes.Statement.Documents.StatementPopulated[];
       }
     }
   }
 
-  // Sentence Namespace
-  export namespace Sentence {
+  // Statement Namespace
+  export namespace Statement {
     export namespace Documents {
-      export interface Sentence {
+      export interface Statement {
         pageID: mongoose.Types.ObjectId;
         versions: {
           stringArray: {
             string?: string;
-            styles: AgoraTypes.Sentence.Types.StyleTypes;
+            styles: AgoraTypes.Statement.Types.StyleTypes;
           }[];
           createdAt: Date;
         }[];
@@ -63,12 +63,12 @@ namespace AgoraTypes {
           | mongoose.Types.ObjectId[];
       }
 
-      export interface SentencePopulated
-        extends AgoraTypes.Sentence.Documents.Sentence {
+      export interface StatementPopulated
+        extends AgoraTypes.Statement.Documents.Statement {
         versions: {
           stringArray: {
             string?: string;
-            styles: AgoraTypes.Sentence.Types.PopulatedStyleTypes;
+            styles: AgoraTypes.Statement.Types.PopulatedStyleTypes;
           }[];
           createdAt: Date;
         }[];
@@ -79,8 +79,8 @@ namespace AgoraTypes {
         questions: AgoraTypes.Question.Documents.Question[];
       }
 
-      export interface SentencePopulatedFull
-        extends AgoraTypes.Sentence.Documents.SentencePopulated {
+      export interface StatementPopulatedFull
+        extends AgoraTypes.Statement.Documents.StatementPopulated {
         relatedPages: AgoraTypes.Page.Documents.PagePopulated[];
       }
     }
@@ -145,7 +145,7 @@ namespace AgoraTypes {
       export type PopulatedQuoteStyleType = QuoteStyleType & {
         value: {
           page: AgoraTypes.Page.Documents.Page;
-          sentence: AgoraTypes.Sentence.Documents.SentencePopulated;
+          sentence: AgoraTypes.Statement.Documents.StatementPopulated;
           sentenceID: mongoose.Types.ObjectId;
         };
       };
