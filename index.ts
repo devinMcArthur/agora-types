@@ -45,7 +45,7 @@ namespace AgoraTypes {
   // Statement Namespace
   export namespace Statement {
     export namespace Documents {
-      export interface Statement {
+      export interface Statement extends mongoose.Document {
         pageID: mongoose.Types.ObjectId;
         versions: {
           stringArray: {
@@ -234,7 +234,7 @@ namespace AgoraTypes {
   // PageConnection namespace
   export namespace PageConnection {
     export namespace Documents {
-      export interface PageConnection {
+      export interface PageConnection extends mongoose.Document {
         referencedPageID: mongoose.Types.ObjectId;
         referrerPageID: mongoose.Types.ObjectId;
         statementID: mongoose.Types.ObjectId;
@@ -244,7 +244,7 @@ namespace AgoraTypes {
 
   export namespace QuestionPageConnection {
     export namespace Documents {
-      export interface QuestionPageConnection {
+      export interface QuestionPageConnection extends mongoose.Document {
         referrerPageID: mongoose.Types.ObjectId;
         questionID: mongoose.Types.ObjectId;
         statementID: mongoose.Types.ObjectId;
@@ -254,7 +254,7 @@ namespace AgoraTypes {
 
   export namespace VariablePageConnection {
     export namespace Documents {
-      export interface VariablePageConnection {
+      export interface VariablePageConnection extends mongoose.Document {
         referrerPageID: mongoose.Types.ObjectId;
         variableID: mongoose.Types.ObjectId;
         statementID: mongoose.Types.ObjectId;
