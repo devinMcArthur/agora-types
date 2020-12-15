@@ -7,9 +7,7 @@ namespace AgoraTypes {
       export interface Page extends mongoose.Document {
         title: string;
         slug: string;
-        paragraphVersionConnections: Array<{
-          paragraphID: mongoose.Types.ObjectId;
-        }>;
+        paragraphVersionConnections: AgoraTypes.Paragraph.Documents.Paragraph["_id"][];
       }
 
       export interface PagePopulated extends Page {
@@ -28,10 +26,10 @@ namespace AgoraTypes {
   export namespace Paragraph {
     export namespace Documents {
       export interface Paragraph extends mongoose.Document {
-        pageID: mongoose.Types.ObjectId;
+        pageID: AgoraTypes.Page.Documents.Page["_id"];
         statements:
-          | AgoraTypes.Statement.Documents.StatementPopulated[]
-          | mongoose.Types.ObjectId[];
+          | AgoraTypes.Statement.Documents.Statement["_id"][]
+          | AgoraTypes.Statement.Documents.StatementPopulated[];
         version: number;
         mostRecent: boolean;
       }
@@ -46,7 +44,7 @@ namespace AgoraTypes {
   export namespace Statement {
     export namespace Documents {
       export interface Statement extends mongoose.Document {
-        pageID: mongoose.Types.ObjectId;
+        pageID: AgoraTypes.Page.Documents.Page["_id"];
         versions: {
           stringArray: {
             string?: string;
@@ -55,12 +53,14 @@ namespace AgoraTypes {
           createdAt: Date;
         }[];
         sources: {
-          pages: AgoraTypes.Page.Documents.Page[] | mongoose.Types.ObjectId[];
+          pages:
+            | AgoraTypes.Page.Documents.Page["_id"][]
+            | AgoraTypes.Page.Documents.Page[];
           urls: string[];
         };
         questions:
-          | AgoraTypes.Question.Documents.Question[]
-          | mongoose.Types.ObjectId[];
+          | AgoraTypes.Question.Documents.Question["_id"][]
+          | AgoraTypes.Question.Documents.Question[];
       }
 
       export interface StatementPopulated
@@ -90,7 +90,7 @@ namespace AgoraTypes {
         type: "mention";
         variant: "internal";
         value: {
-          pageID: mongoose.Types.ObjectId;
+          pageID: AgoraTypes.Page.Documents.Page["_id"];
         };
       };
 
@@ -105,14 +105,14 @@ namespace AgoraTypes {
       export type VariableStyleType = {
         type: "variable";
         value: {
-          variableID: mongoose.Types.ObjectId;
+          variableID: AgoraTypes.Variable.Documents.Variable["_id"];
         };
       };
 
       export type QuoteStyleType = {
         type: "quote";
         value: {
-          statementID: mongoose.Types.ObjectId;
+          statementID: AgoraTypes.Statement.Documents.Statement["_id"];
         };
       };
 
@@ -130,7 +130,7 @@ namespace AgoraTypes {
 
       export type PopulatedInternalMentionStyleType = InternalMentionStyleType & {
         value: {
-          pageID: mongoose.Types.ObjectId;
+          pageID: AgoraTypes.Page.Documents.Page["_id"];
           page: AgoraTypes.Page.Documents.Page;
         };
       };
@@ -138,7 +138,7 @@ namespace AgoraTypes {
       export type PopulatedVariableStyleType = VariableStyleType & {
         value: {
           variable: AgoraTypes.Variable.Documents.VariablePopulated;
-          variableID: mongoose.Types.ObjectId;
+          variableID: AgoraTypes.Variable.Documents.Variable["_id"];
         };
       };
 
@@ -146,7 +146,7 @@ namespace AgoraTypes {
         value: {
           page: AgoraTypes.Page.Documents.Page;
           statement: AgoraTypes.Statement.Documents.StatementPopulated;
-          statementID: mongoose.Types.ObjectId;
+          statementID: AgoraTypes.Statement.Documents.Statement["_id"];
         };
       };
 
@@ -235,9 +235,9 @@ namespace AgoraTypes {
   export namespace PageConnection {
     export namespace Documents {
       export interface PageConnection extends mongoose.Document {
-        referencedPageID: mongoose.Types.ObjectId;
-        referrerPageID: mongoose.Types.ObjectId;
-        statementID: mongoose.Types.ObjectId;
+        referencedPageID: AgoraTypes.Page.Documents.Page["_id"];
+        referrerPageID: AgoraTypes.Page.Documents.Page["_id"];
+        statementID: AgoraTypes.Statement.Documents.Statement["_id"];
       }
     }
   }
@@ -245,9 +245,9 @@ namespace AgoraTypes {
   export namespace QuestionPageConnection {
     export namespace Documents {
       export interface QuestionPageConnection extends mongoose.Document {
-        referrerPageID: mongoose.Types.ObjectId;
-        questionID: mongoose.Types.ObjectId;
-        statementID: mongoose.Types.ObjectId;
+        referrerPageID: AgoraTypes.Page.Documents.Page["_id"];
+        questionID: AgoraTypes.Question.Documents.Question["_id"];
+        statementID: AgoraTypes.Statement.Documents.Statement["_id"];
       }
     }
   }
@@ -255,9 +255,9 @@ namespace AgoraTypes {
   export namespace VariablePageConnection {
     export namespace Documents {
       export interface VariablePageConnection extends mongoose.Document {
-        referrerPageID: mongoose.Types.ObjectId;
-        variableID: mongoose.Types.ObjectId;
-        statementID: mongoose.Types.ObjectId;
+        referrerPageID: AgoraTypes.Page.Documents.Page["_id"];
+        variableID: AgoraTypes.Variable.Documents.Variable["_id"];
+        statementID: AgoraTypes.Statement.Documents.Statement["_id"];
       }
     }
   }
