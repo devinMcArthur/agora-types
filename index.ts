@@ -61,6 +61,7 @@ namespace AgoraTypes {
         questions:
           | AgoraTypes.Question.Documents.Question["_id"][]
           | AgoraTypes.Question.Documents.Question[];
+        current: boolean;
       }
 
       export interface StatementPopulated
