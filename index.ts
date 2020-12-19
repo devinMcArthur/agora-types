@@ -200,7 +200,7 @@ namespace AgoraTypes {
         | { type: "number"; number: number; sourceURL: string; createdAt: Date }
         | {
             type: "equation";
-            equation: EquationTypes;
+            equation: AgoraTypes.Variable.Types.EquationTypes;
             sourceURL?: string;
             createdAt: Date;
           };
@@ -215,7 +215,7 @@ namespace AgoraTypes {
           }
         | {
             type: "equation";
-            equation: EquationTypes;
+            equation: AgoraTypes.Variable.Types.EquationTypes;
             sourceURL: string;
             createdAt: Date;
             finalValue: number;
